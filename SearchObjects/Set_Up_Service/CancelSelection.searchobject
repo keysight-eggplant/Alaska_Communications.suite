@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		1346,
+		986,
+		129,
+		27
+	],
+	"lastmodifieddate": 1658180431.779,
+	"createddate": 1658180431.779,
+	"name": "Set_Up_Service/CancelSelection",
+<<<<<<< HEAD
+	"lastfounddate": 1659458259.24,
+=======
+	"lastfounddate": 1659085197.7589998,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "CANCEL SELECTION",
+	"lastfoundlocation": [
+		1346,
+		986,
+		129,
+		27
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[64,13]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Set_Up_Service/CancelSelection.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1346,
+					986,
+					129,
+					27
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "CANCEL SELECTION"
+			}
+	]
+}

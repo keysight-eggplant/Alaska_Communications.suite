@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		531,
+		382,
+		159,
+		28
+	],
+	"lastmodifieddate": 1658075450.698,
+	"createddate": 1658074564.7639999,
+	"name": "ORDERNEWSERVICE",
+<<<<<<< HEAD
+	"lastfounddate": 1659458038.3990002,
+=======
+	"lastfounddate": 1659021349.175,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "ORDER NEW SERVICE",
+	"lastfoundlocation": [
+		531,
+		427,
+		159,
+		28
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[79,14]",
+					"Tolerance": "_66",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Order_New_Service/OrderNewService.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					531,
+					382,
+					159,
+					28
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "ORDER NEW SERVICE"
+			}
+	]
+}

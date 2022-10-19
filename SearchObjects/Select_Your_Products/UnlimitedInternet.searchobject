@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		44,
+		364,
+		182,
+		32
+	],
+	"lastmodifieddate": 1658169290.046,
+	"createddate": 1658169290.046,
+	"name": "Select_Your_Products/UnlimitedInternet",
+<<<<<<< HEAD
+	"lastfounddate": 1659458246.8540001,
+=======
+	"lastfounddate": 1659085185.142,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "Unlimited Internet",
+	"lastfoundlocation": [
+		44,
+		364,
+		182,
+		32
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[91,16]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_Your_Products/UnlimitedInternet.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					44,
+					364,
+					182,
+					32
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "Unlimited Internet"
+			}
+	]
+}

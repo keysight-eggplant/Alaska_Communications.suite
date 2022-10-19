@@ -1,0 +1,48 @@
+{
+	"originalcapturelocation": [
+		1651,
+		965,
+		118,
+		44
+	],
+	"lastmodifieddate": 1658073418.47,
+	"createddate": 1658073046.3299999,
+	"name": "Cookies_AllowAll",
+	"lastfounddate": 1659521389.688,
+	"ocrcapturestring": "ALLOWALL",
+	"lastfoundlocation": [
+		1651,
+		965,
+		118,
+		44
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[59,22]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "HomePage/Cookies_AllowAll.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1651,
+					965,
+					118,
+					44
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "ALLOWALL"
+			}
+	]
+}

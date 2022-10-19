@@ -1,0 +1,256 @@
+
+(** This script is to "Check service availability"
+//Three different types of wait time
+@Params maxWait: 
+@Params FullMaxWait: 
+@Params minWait: 
+
+
+@Version:  3.0 19/10/2022 **)
+
+to checkserviceAvailability FullMaxWait, maxWait, minWait
+
+	set the ScriptLogging to off
+	
+	// Calculate timestamp to use in results filename
+	put formattedTime("%d%m%Y_%H%M") into timestamp
+	
+	//  copy the results file template and rename it using the timestamp
+	copy file ResourcePath("Results_data.xlsx") as ResourcePath("Results_data_"&timestamp&".xlsx")
+	
+	// read in the test data spreadsheet as a database
+	set myExcelDB to {type: "excel", file: ResourcePath("EggplantSampleData_OP_20221006.xlsx")}
+	put the records of myExcelDB into spreadsheet_contents
+	
+	// Initialise the Results Spreadsheet as a writable database
+	set ResultsDB to {type: "excel", file: ResourcePath("Results_data_"&timestamp&".xlsx"), writable: yes}
+	set ResultsTable to Table "Results" of ResultsDB
+	
+	
+	// go through each record of the test data database
+	repeat with each item of spreadsheet_contents
+		
+		set speed to empty
+		Log "IterationCount: "&repeatindex()
+		put it.maxbbspeed_res into ExpSpeed
+		Log "Expected internet speed: "&ExpSpeed
+		
+		try  //Try catch block to ensure it flows through the entire data sheet
+			-- enter first name
+			Click "Check_service_availability/accountowner_Fname"
+			TypeText ControlKey,"a",DeleteKey
+			TypeText "firstname"&repeatIndex()
+			TypeText Tab
+			
+			
+			-- enter second name
+			TypeText ControlKey,"a",DeleteKey
+			TypeText "Lastname"&repeatIndex()
+			TypeText Tab
+			
+			-- enter address ,This scenario is when the user tries repeatedly
+			if ImageFound("Select_your_Location/AddaNewLocation")
+				//repeat loop since the link is not reactive sometimes
+				repeat 2 times
+					
+					if not ImageFound(Image:"Select_your_Location/serviceaddress")
+						Click "Select_your_Location/AddaNewLocation"
+					else
+						Log "Found the address field"
+						Exit repeat
+					end if 
+				end repeat
+				
+				Click "Select_your_Location/serviceaddress"
+				TypeText ControlKey,"a",DeleteKey
+				SetOption KeyDownDelay, 0.09
+				// type in the address
+				TypeText it.fullserviceaddress
+				Assert imageFound(Image: "Select_your_Location/DropDown", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with displaying the location"
+				TypeText returnKey
+				
+				Assert imageFound(Image: "Select_your_Location/LocationSelected", SearchRectangle:["Select_your_Location/LocationSelected_A","Select_your_Location/LocationSelected_B"], WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with selecting location"
+				SetOption KeyDownDelay,0.02 //0.02 is the Default value, so setting it back to default value
+				
+				put it.fullserviceaddress into AddVal
+				Log AddVal
+				
+				//Click on Check Service Availability
+				Click Image: "Select_your_Location/CheckServiceAvailability"
+				
+				//Handle the POPUP if it is displayed	
+				Wait 3  // This is for the popup to trigger
+				// if else condition to handle if popup is not displayed
+				if ImageFound(Image: "Select_your_Location/YesChangeLocation", WaitFor: minWait)
+					Click Image: "Select_your_Location/YesChangeLocation"
+					put time into start_time 
+					log start_time
+					Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
+					Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
+					
+					// Calculating the duration of displaying the Products on the Page 
+					put time into products_page_end_time 
+					log products_page_end_time 
+					put products_page_end_time - start_time into products_page_time_Interval
+					log "Duration for Products Page: "&products_page_time_Interval
+					
+				else
+					put time into start_time 
+					log start_time
+					Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
+					Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
+					// Calculating the duration of displaying the Products on the Page 
+					put time into products_page_end_time 
+					log products_page_end_time 
+					put products_page_end_time - start_time into products_page_time_Interval
+					log "Duration for Products Page: "&products_page_time_Interval
+					
+					
+				end if
+				
+			else
+				
+				//This scenario when the user tries for first time. Add new Location would not be available for first time
+				Click "Select_your_Location/serviceaddress"
+				TypeText ControlKey,"a",DeleteKey
+				SetOption KeyDownDelay, 0.09
+				
+				// type address
+				TypeText it.fullserviceaddress
+				Assert imageFound(Image: "Select_your_Location/DropDown", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with displaying the location"
+				TypeText returnKey
+				
+				Assert imageFound(Image: "Select_your_Location/LocationSelected", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with selecting location"
+				SetOption KeyDownDelay,0.02 //0.02 is the Default value, so setting it back to default value
+				//To Validate the address,assign to variable to compare
+				put it.fullserviceaddress into AddVal
+				Log AddVal
+				
+				
+				//Click Service Availability button
+				Click Image: "Select_your_Location/CheckServiceAvailability"
+				put time into start_time 
+				log start_time
+				Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
+				Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
+				// Calculating the duration of displaying the Products on the Page 
+				put time into products_page_end_time 
+				log products_page_end_time 
+				put products_page_end_time - start_time into products_page_time_Interval
+				log "Duration for Products Page: "&products_page_time_Interval
+				
+			end if 
+			-- check max speed
+			//********************************* Select Your Product Page***********************************
+			if not ImageFound({Image:"Select_Your_Products/UnlimitedInternet", WaitFor:minWait})
+				// No Unlimited Internet means go back to Previous Page
+				Click Image:"Select_Your_Products/Internet"
+				TypeText PageDown
+				Assert imageFound(Image:"Select_Your_Products/Back", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to previous page"
+				Click Image: "Select_Your_Products/Back"
+				
+				//Since no unlimited internet, writing 0 to speed
+				put "0" into speed
+				
+				//Since no unlimited internet, writing N/A for duration
+				put "N/A" into setup_service_timeInterval
+				
+				Log "-----------Reached the end----------------"
+			else
+				//****************************Set Up Your Service PopUp Window*********************************
+				//Calculating time taken for the popup window to display data
+				put time into starttime 
+				log starttime
+				//Click on Select button in Unlimited internet option
+				Click {Image:"Select_Your_Products/Select",WaitFor:minWait}
+				// if else condition since it sometimes displays data by clicking on Continue button
+				if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor:FullMaxWait)
+					Assert imageFound(Image:"Set_Up_Service/QUnlimitedInternet") with Exception !"[[my name]]: An exception occured with launching products"
+					put "N/A" into click_continue
+				else 
+					Log "SetUpService Unlimited Window is not getting populated, hence clicking on continue button as some times it populates the window" 
+					Click Image: "Set_Up_Service/Continue"
+					
+					put "True" into click_continue
+					Assert imageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with launching products"
+				end if
+				
+				// calculate the duration of displaying the internet speed
+				put time into setup_service_endtime 
+				log setup_service_endtime 
+				put setup_service_endtime- starttime into setup_service_timeInterval
+				log "Duration of displaying internet speed popup window: "&setup_service_timeInterval
+				
+				//Extracting data from the application
+				Put  readtext("Set_Up_Service/InternetSpeed_A","Set_Up_Service/InternetSpeed_B") into Readspeed
+				put word 1 delimited by "Mbps " of Readspeed into speed
+				Assert speed is (ExpSpeed) with error !"[[my name]]: Actual speed is [[speed]]"
+				
+				//To scroll down-- To close the Popup window
+				Click Image:"Set_Up_Service/QUnlimitedInternet" 
+				TypeText PageDown
+				Assert imageFound(Image:"Set_Up_Service/CancelSelection", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with PageDown Key"
+				Click "Set_Up_Service/CancelSelection"
+				Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to products page"
+				-- go back,************************ Navigating back to Select Your Location Page***************************************
+				Click {Image:"Select_Your_Products/Internet"}
+				TypeText PageDown
+				Assert imageFound(Image:"Select_Your_Products/Back", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to previous page"
+				Click {Image: "Select_Your_Products/Back"}
+				Assert imageFound(Image: "Select_your_Location/AddaNewLocation", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured navigating to home page"
+				Log "-----------Reached the end----------------"
+			end if
+		catch anException
+			// This would get executed if any of the code in the try loop fail
+			Log "*****CatchException*******Navigting back to Select Your Location Page*************************"
+			//This if condition incase the internet speed popup window hangs
+			if ImageFound(Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait)
+				Click [Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait]
+				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+				Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
+				WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
+			end if
+			//This if condition incase the internet speed popup window hangs after displaying data
+			if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor: maxWait)
+				Click {Image:"Set_Up_Service/QUnlimitedInternet", WaitFor: maxWait}
+				TypeText PageDown
+				Click {Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait}
+				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+				Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
+				WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
+			end if
+			//This if condition incase the Product Page hangs
+			if ImageFound(Image:"Select_Your_Products/Internet", WaitFor: maxWait)
+				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+				//The below condition if the Page hangs and needs a refresh
+				if not ImageFound(Image:"Select_Your_Products/Back", WaitFor: maxWait)
+					Click {Image:"Browser/RefreshPage"}
+					WaitFor maxWait, "Select_Your_Products/Select"
+					ScrollWheelDown 4
+					Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}				
+					Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
+					WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
+				else
+					Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
+					WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
+				end if
+			end if	
+			
+			Log "-----------Reached the end in case of exception----------------"
+			
+		end try
+		
+		if ExpSpeed is equal to speed
+			put "True" into speed_match
+		else
+			put "False" into speed_match
+		end if
+		
+		// Write all the results to the Results Spreadsheet
+		set newRecord to {FullServiceAddress: it.FullServiceAddress, SrvLocation_LocationID: it.SrvLocation_LocationID, MaxBBSpeed_Res:it.MaxBBSpeed_Res, Actual_Speed:speed, Comparison: speed_match, Products_Page_Duration: products_page_time_Interval, Products_Page_TimeStamp:products_page_end_time, SetUp_your_Service_Duration: setup_service_timeInterval, SetUp_Your_Service_TimeStamp:setup_service_endtime, Click_Continue: click_continue}
+		add record newRecord to ResultsTable
+		
+	end repeat
+	
+	
+end checkserviceAvailability

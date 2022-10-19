@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		439,
+		467,
+		146,
+		21
+	],
+	"lastmodifieddate": 1658326905.9759998,
+	"createddate": 1658176611.7480001,
+	"name": "Set_Up_Service/QUnlimitedInternet",
+<<<<<<< HEAD
+	"lastfounddate": 1659458254.8829999,
+=======
+	"lastfounddate": 1659085195.8049998,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "Q Unlimited Internet",
+	"lastfoundlocation": [
+		439,
+		442,
+		146,
+		21
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[73,10]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Set_Up_Service/QUnlimitedInternet/QUnlimitedInternet.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					439,
+					467,
+					146,
+					21
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "Q Unlimited Internet"
+			}
+	]
+}

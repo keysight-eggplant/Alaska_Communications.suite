@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		1439,
+		596,
+		222,
+		23
+	],
+	"lastmodifieddate": 1658166530.3200002,
+	"createddate": 1658166530.3200002,
+	"name": "Select_your_Location/CheckServiceAvailability",
+<<<<<<< HEAD
+	"lastfounddate": 1659458237.4949999,
+=======
+	"lastfounddate": 1659085174.4879999,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "Q CHECK SERVICE AVAILABILITY",
+	"lastfoundlocation": [
+		1439,
+		629,
+		222,
+		23
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[111,11]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/CheckServiceAvailability.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1439,
+					596,
+					222,
+					23
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "Q CHECK SERVICE AVAILABILITY"
+			}
+	]
+}

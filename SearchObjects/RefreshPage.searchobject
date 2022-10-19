@@ -1,0 +1,48 @@
+{
+	"originalcapturelocation": [
+		73,
+		41,
+		24,
+		24
+	],
+	"lastmodifieddate": 1659019703.8010001,
+	"createddate": 1659017447.066,
+	"name": "RefreshPage",
+	"lastfounddate": 1660061034.5110002,
+	"ocrcapturestring": "c",
+	"lastfoundlocation": [
+		73,
+		41,
+		24,
+		24
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[12,12]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Browser/RefreshPage.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					73,
+					41,
+					24,
+					24
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "c"
+			}
+	]
+}

@@ -1,0 +1,48 @@
+{
+	"originalcapturelocation": [
+		596,
+		694,
+		150,
+		28
+	],
+	"lastmodifieddate": 1658077531.513,
+	"createddate": 1658074523.691,
+	"name": "CHECKMYADDRESS",
+	"lastfounddate": 1658074524.378,
+	"ocrcapturestring": "CHECK MY ADDRESS",
+	"lastfoundlocation": [
+		596,
+		694,
+		150,
+		28
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[75,14]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "HomePage/CheckMyAddress/CheckMyAddress1.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					596,
+					694,
+					150,
+					28
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "CHECK MY ADDRESS"
+			}
+	]
+}

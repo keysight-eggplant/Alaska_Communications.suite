@@ -1,0 +1,23 @@
+﻿(** This script is the master script that can be run directly from EPF
+
+@Version: 1.0 28/07/2022
+
+ **)
+
+Run "SUT/SUT_connected".checkSUTconnected
+Run "Browser/Launch_Browser".launchBrowser 10, "Chrome"
+
+
+Run "Check_Broadband/Launch_Test_Site".launchAlaska, 20,"https://www.alaskacommunications.com/Residential",FALSE
+Run "Check_Broadband/Check_my_address".checkmyaddress 10
+Run "Check_Broadband/Order_New_Service".orderNewService 10
+
+Run "Check_Broadband/Read_In_Spreadsheet"
+Run "Check_Broadband/Check_Service_availability".checkserviceAvailability 300, 30,5
+
+
+
+
+
+
+

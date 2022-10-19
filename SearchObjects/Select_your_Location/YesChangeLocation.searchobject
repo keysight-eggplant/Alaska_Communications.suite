@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		887,
+		363,
+		150,
+		28
+	],
+	"lastmodifieddate": 1658169150.8969998,
+	"createddate": 1658169150.8969998,
+	"name": "Select_your_Location/YesChangeLocation",
+<<<<<<< HEAD
+	"lastfounddate": 1659458240.937,
+=======
+	"lastfounddate": 1659085177.8380001,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "YES, CHANGE LOCATION",
+	"lastfoundlocation": [
+		887,
+		363,
+		150,
+		28
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[75,14]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/YesChangeLocation.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					887,
+					363,
+					150,
+					28
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "YES, CHANGE LOCATION"
+			}
+	]
+}

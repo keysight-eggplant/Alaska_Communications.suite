@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		1054,
+		149,
+		84,
+		22
+	],
+	"lastmodifieddate": 1658576225.161,
+	"createddate": 1658576080.3569999,
+	"name": "HomePage/PRODUCTS",
+<<<<<<< HEAD
+	"lastfounddate": 1659458011.8380001,
+=======
+	"lastfounddate": 1659021344.7620001,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "PRODUCTS",
+	"lastfoundlocation": [
+		1054,
+		194,
+		84,
+		22
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[42,11]",
+					"Tolerance": "_62",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "HomePage/Products.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1054,
+					149,
+					84,
+					22
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "PRODUCTS"
+			}
+	]
+}

@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		499,
+		352,
+		137,
+		28
+	],
+	"lastmodifieddate": 1658168751.9660001,
+	"createddate": 1658168751.9660001,
+	"name": "Select_your_Location/AddaNewLocation",
+<<<<<<< HEAD
+	"lastfounddate": 1659458293.825,
+=======
+	"lastfounddate": 1659085161.816,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "Add a New Location.",
+	"lastfoundlocation": [
+		499,
+		348,
+		137,
+		28
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[68,14]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/AddaNewLocation.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					499,
+					352,
+					137,
+					28
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "Add a New Location."
+			}
+	]
+}

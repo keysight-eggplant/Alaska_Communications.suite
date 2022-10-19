@@ -1,0 +1,50 @@
+{
+	"lastmodifieddate": 1658345060.3109999,
+	"lastfoundlocation": [
+		1649,
+		447,
+		21,
+		48
+	],
+	"originalcapturelocation": [
+		1649,
+		447,
+		21,
+		48
+	],
+	"createddate": 1658345060.3109999,
+<<<<<<< HEAD
+	"lastfounddate": 1659458232.7709999,
+=======
+	"lastfounddate": 1659085172.0599999,
+>>>>>>> GM-v1.1
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[10,24]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/DropDown.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"capturerect": [
+					1649,
+					447,
+					21,
+					48
+				],
+				"connectiontype": "RDP",
+				"connectionserverid": "99.81.107.4"
+			}
+	],
+	"name": "Select_your_Location/DropDown"
+}

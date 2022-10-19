@@ -1,0 +1,74 @@
+{
+	"originalcapturelocation": [
+		1410,
+		412,
+		70,
+		29
+	],
+	"lastmodifieddate": 1658390111.941,
+	"createddate": 1658311283.9759998,
+	"name": "Set_Up_Service/Continue",
+	"lastfounddate": 1659084708.1009998,
+	"ocrcapturestring": "CONTINUE",
+	"lastfoundlocation": [
+		1410,
+		412,
+		70,
+		29
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[35,14]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Set_Up_Service/Continue/Continue.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1410,
+					412,
+					70,
+					29
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "CONTINUE"
+			},
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[35,14]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Set_Up_Service/Continue/Continue2.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"capturerect": [
+					1402,
+					845,
+					70,
+					29
+				],
+				"connectiontype": "RDP",
+				"connectionserverid": "99.81.107.4"
+			}
+	]
+}

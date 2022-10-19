@@ -1,0 +1,30 @@
+(** This script is to "launch Test site"
+@Params maxWait: The amount of time it would wait
+@Params Url: Test Site Url
+@Params onHomePage: Boolen 
+@Version: 1.0 28/07/2022
+
+ **)
+
+//This is to launch the test site url
+to launchAlaska maxWait,Url,onHomePage
+	
+	if not onHomePage
+		
+		TypeText optionKey,"d" --use shortcut for navigating to address bar
+		TypeText Url, returnKey
+		
+		
+		if ImageFound(Image: "HomePage/Cookies_AllowAll", WaitFor: maxWait)
+			click Image: "HomePage/Cookies_AllowAll"
+		end if
+		Assert imageFound(Image:"HomePage/Alaska", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with Launching Alaska HomePage"
+		Assert imageFound(Image:"HomePage/Products", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with Launching Alaska HomePage to settle"
+	else
+		
+		
+		LogSuccess "Already on Alaska site"
+		
+	end if 
+end launchAlaska
+

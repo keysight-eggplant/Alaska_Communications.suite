@@ -1,0 +1,50 @@
+{
+	"lastmodifieddate": 1658073415.8899999,
+	"lastfoundlocation": [
+		382,
+		157,
+		191,
+		74
+	],
+	"originalcapturelocation": [
+		382,
+		112,
+		191,
+		74
+	],
+	"createddate": 1658072968.4429998,
+<<<<<<< HEAD
+	"lastfounddate": 1659458011.7309999,
+=======
+	"lastfounddate": 1659021341.4780002,
+>>>>>>> GM-v1.1
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[95,37]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "HomePage/Alaska.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"capturerect": [
+					382,
+					112,
+					191,
+					74
+				],
+				"connectiontype": "RDP",
+				"connectionserverid": "99.81.107.4"
+			}
+	],
+	"name": "Alaska"
+}

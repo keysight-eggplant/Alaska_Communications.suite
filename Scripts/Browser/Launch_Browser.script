@@ -1,0 +1,49 @@
+﻿(** This script is to "launch browser" , either chrome or Firefox.
+maxWait: The amount of time it would wait
+browserType: Type of browser to be launched
+
+@Version: 1.0 28/07/2022
+ **)
+
+to launchBrowser maxWait, browserType
+
+	Run "Browser/CleanUp".close_browser
+	
+	TypeText windowskey, "r" --"R"
+	
+	
+	set command to empty
+	set browserImage to empty
+	
+	if browserType is ...
+	
+		..."chrome" then
+			put "chrome" into command
+			put "Browser/Refresh" into browserImage
+			
+		..."firefox" then
+			put "firefox" into command
+			put "Browser/BrowserOpen" into browserImage
+			
+		else
+			
+			LogError !"BrowserType [[browserType]] not currently supported. Please enter either chrome or firefox"
+			
+	end if
+	TypeText windowskey, UpArrow
+	TypeText command & returnKey
+	
+	
+	
+	Assert imageFound(Image:browserImage, WaitFor:maxWait) with Exception !"[[my name]]: Checking browser [[browserType]] is open."
+	
+	//This is to maximize the browser Window
+	TypeText windowskey,UpArrow
+	
+end launchBrowser
+
+
+
+
+
+

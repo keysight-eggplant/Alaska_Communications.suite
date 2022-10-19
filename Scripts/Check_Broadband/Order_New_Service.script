@@ -1,0 +1,13 @@
+﻿(** This script is to "Click on order new service"
+@Params maxWait: The amount of time it would wait
+@Version: 1.0 28/07/2022
+
+ **)
+//to click on order new service 
+
+to orderNewService maxWait
+	Click {Image:"Order_new_Service/OrderNewService", WaitFor: maxWait}
+	Assert imageFound(Image:"Order_new_Service/Order_newService_Page", WaitFor:maxWait) with Exception !"[[my name]]: Checking if Order new service Page is displayed"
+	
+	
+end orderNewService

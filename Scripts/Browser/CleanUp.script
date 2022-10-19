@@ -1,0 +1,20 @@
+(** This script is to "close browser" which have been left open.
+
+@Version: 1.0 28/07/2022
+
+ **)
+
+
+to close_browser maxWait
+
+	Repeat while imageFound(Image:"Browser",WaitFor: maxWait)
+		
+		log !"closing browser attempt [[the repeatIndex]]"
+		TypeText controlKey&"w"
+		Wait 2
+		
+		if the repeatIndex is greater than 5 then exit repeat
+		
+	End Repeat
+	
+end close_browser

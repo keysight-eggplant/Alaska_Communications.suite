@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		254,
+		526,
+		31,
+		22
+	],
+	"lastmodifieddate": 1658255955.8600001,
+	"createddate": 1658237677.299,
+	"name": "Select_your_Location/LocationSelected",
+<<<<<<< HEAD
+	"lastfounddate": 1659458237.0570002,
+=======
+	"lastfounddate": 1659085173.8270001,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "o",
+	"lastfoundlocation": [
+		259,
+		560,
+		19,
+		18
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[15,11]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/LocationSelected/LocationSelected.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					254,
+					526,
+					31,
+					22
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "o"
+			}
+	]
+}

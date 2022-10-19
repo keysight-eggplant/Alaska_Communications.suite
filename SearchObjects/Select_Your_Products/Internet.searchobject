@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		79,
+		269,
+		49,
+		53
+	],
+	"lastmodifieddate": 1659091669.576,
+	"createddate": 1658167966.8530002,
+	"name": "Select_Your_Products/Internet",
+<<<<<<< HEAD
+	"lastfounddate": 1659458261.4910002,
+=======
+	"lastfounddate": 1659093747.3540001,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "INTERNET",
+	"lastfoundlocation": [
+		79,
+		269,
+		49,
+		53
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[24,26]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_Your_Products/Internet/Internet.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					79,
+					269,
+					49,
+					53
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "INTERNET"
+			}
+	]
+}

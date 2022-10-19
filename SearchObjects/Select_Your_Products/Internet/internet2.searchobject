@@ -1,0 +1,46 @@
+{
+	"lastmodifieddate": 1659517733.609,
+	"lastfoundlocation": [
+		84,
+		274,
+		37,
+		30
+	],
+	"originalcapturelocation": [
+		84,
+		274,
+		37,
+		30
+	],
+	"createddate": 1659517733.609,
+	"lastfounddate": 1659521507.5450001,
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[18,15]",
+					"Tolerance": "_45",
+					"Discrepancy": "_0",
+					"SearchType": "Tolerant of Background"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_Your_Products/Internet/internet2.png",
+				"connectionname": "34.241.81.102",
+				"type": 1,
+				"capturerect": [
+					84,
+					274,
+					37,
+					30
+				],
+				"connectiontype": "RDP",
+				"connectionserverid": "34.241.81.102"
+			}
+	],
+	"name": "Select_Your_Products/Internet/internet2"
+}

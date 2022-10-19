@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		1703,
+		718,
+		49,
+		24
+	],
+	"lastmodifieddate": 1658168579.0829999,
+	"createddate": 1658168579.0829999,
+	"name": "Select_Your_Products/Back",
+<<<<<<< HEAD
+	"lastfounddate": 1659458266.109,
+=======
+	"lastfounddate": 1659093753.2020001,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "BACK",
+	"lastfoundlocation": [
+		1703,
+		718,
+		49,
+		24
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[24,12]",
+					"Tolerance": "_73",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_Your_Products/Back.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					1703,
+					718,
+					49,
+					24
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "BACK"
+			}
+	]
+}

@@ -1,0 +1,52 @@
+{
+	"originalcapturelocation": [
+		428,
+		385,
+		105,
+		27
+	],
+	"lastmodifieddate": 1658180957.6289999,
+	"createddate": 1658180957.6289999,
+	"name": "Select_your_Location/serviceaddress",
+<<<<<<< HEAD
+	"lastfounddate": 1659458296.7290001,
+=======
+	"lastfounddate": 1659085164.9809999,
+>>>>>>> GM-v1.1
+	"ocrcapturestring": "service address",
+	"lastfoundlocation": [
+		428,
+		385,
+		105,
+		27
+	],
+	"testlocationdata": [
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[-163,40]",
+					"Tolerance": "_50",
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_your_Location/serviceaddress.png",
+				"connectionname": "99.81.107.4",
+				"type": 1,
+				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					428,
+					385,
+					105,
+					27
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "service address"
+			}
+	]
+}

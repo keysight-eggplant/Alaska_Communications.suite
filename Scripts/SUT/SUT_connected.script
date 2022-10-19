@@ -1,0 +1,29 @@
+(**Handlers for setting up the SUT and browser etc
+
+@Version: 1.0 28/07/2022
+
+**)
+
+to checkSUTconnected
+	
+	repeat 2 minutes
+		
+		if not Connected of ConnectionInfo() then
+			
+			Logwarning "SUT does not seem to be connected.Trying again in 10seconds."		
+			wait 10	
+			
+		else
+			
+			Log !"[[my name]]: SUT connected!"
+			Exit Repeat
+			
+		end if
+		
+	end repeat
+	
+	Assert Connected of ConnectionInfo() with error !"[[my name]]: Checking SUT connected"
+	Assert RemoteScreenSize() is [1920,1080] with error !"[[my name]]: Remote Screen Size is [[RemoteScreenSize()]]"
+	Wait 10
+	
+end checkSUTconnected
