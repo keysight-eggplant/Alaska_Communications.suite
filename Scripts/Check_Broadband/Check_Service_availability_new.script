@@ -81,7 +81,7 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				Assert imageFound(Image: "Select_your_Location/LocationSelected", SearchRectangle:["Select_your_Location/LocationSelected_A","Select_your_Location/LocationSelected_B"], WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with selecting location"
 				SetOption KeyDownDelay,0.02 //0.02 is the Default value, so setting it back to default value
 				
-			put CurrentRecord.fullserviceaddress into AddVal
+				put CurrentRecord.fullserviceaddress into AddVal
 				Log "Check for service at the following address:" && AddVal
 				
 				//Click on Check Service Availability
@@ -117,7 +117,7 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 					
 				end if
 				
-				else
+			else
 				
 				//This scenario when the user tries for first time. Add new Location would not be available for first time
 				Click "Select_your_Location/serviceaddress"
@@ -215,7 +215,7 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				Assert imageFound(Image: "Select_your_Location/AddaNewLocation", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured navigating to home page"
 				Log "-----------Reached the end----------------"
 			end if
-			catch anException
+		catch anException
 			// This would get executed if any of the code in the try loop fail
 			Log "*****CatchException*******Navigting back to Select Your Location Page*************************"
 			set CurrentRecord.Status to "E" -- flags record as an error
@@ -267,7 +267,7 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 	set newRecord to {FullServiceAddress: it.FullServiceAddress, SrvLocation_LocationID: it.SrvLocation_LocationID, MaxBBSpeed_Res:it.MaxBBSpeed_Res, Actual_Speed:speed, Comparison: speed_match, Products_Page_Duration: products_page_time_Interval, Products_Page_TimeStamp:products_page_end_time, SetUp_your_Service_Duration: setup_service_timeInterval, SetUp_Your_Service_TimeStamp:setup_service_endtime, Click_Continue: click_continue}
 	add record newRecord to ResultsTable*)
 		
-		Set CurrentRecord.Status to "F" -- flags the record as having finished
+		If CurrentRecord.Status = "S" then Set CurrentRecord.Status to "F" -- flags the record as having finished
 		
 	end repeat
 	
