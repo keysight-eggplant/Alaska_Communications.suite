@@ -1,4 +1,4 @@
-
+﻿
 (** This script is to "Check service availability"
 //Three different types of wait time
 @Params maxWait: 
@@ -6,39 +6,51 @@
 @Params minWait: 
 
 
-@Version:  2.0 04/08/2022 **)
+@Version:  3.0 19/10/2022 **)
 
 to checkserviceAvailability FullMaxWait, maxWait, minWait
-	//Sets Resultsdata as a reference variable for the Results_data.xlsx. This is to write the extracted data for comparisons
-	set Resultsdata to Workbook(ResourcePath("CopperPlant_EggplantSample.xlsx"))
-	
-	//sets the worsheet named Sheet1 to Worksheet1
-	set worksheet1 to Resultsdata.Worksheet("Sheet1")
+
+	-- set the ScriptLogging to off
 	
 	
-	repeat for each key of the keys of global spreadsheet_data
+	Run "Check_Broadband/create_results_file"
+	
+	
+	// Initialise the Results Spreadsheet as a writable database
+	set ResultsDB to {type: "excel", file: ResourcePath(global filename), name:"Sheet1", writable: yes}
+	
+	
+	// go through each record of the test data database
+	repeat with each item CurrentRecord of the records of ResultsDB by reference
+		
 		set speed to empty
 		Log "IterationCount: "&repeatindex()
-		Log "Cell data being used from rownum: "&global spreadsheet_data.(key)."Cellcount"+1
+		
+		Log "Expected internet speed: "& CurrentRecord.maxbbspeed_res
+		Set CurrentRecord.Status to "S" -- flags the record as having started
+		
 		try  //Try catch block to ensure it flows through the entire data sheet
 			-- enter first name
 			Click "Check_service_availability/accountowner_Fname"
 			TypeText ControlKey,"a",DeleteKey
-			TypeText global spreadsheet_data.(key)."firstname"
-			TypeText Tab
+			Set CurrentRecord.FirstName to "Firstname"&repeatIndex()
+			TypeText CurrentRecord.FirstName,Tab
 			
 			
-			-- enter second name]
+			-- enter second name
 			TypeText ControlKey,"a",DeleteKey
-			TypeText global spreadsheet_data.(key)."Lastname"
-			TypeText Tab
+			Set CurrentRecord.LastName to "Lastname"&repeatIndex()
+			TypeText CurrentRecord.LastName,Tab
 			
 			-- enter address ,This scenario is when the user tries repeatedly
 			if ImageFound("Select_your_Location/AddaNewLocation")
+				Click FoundImageLocation()
+				set myServiceAddressSearchArea to (ImageRectangle("Select_your_Location/AddaNewLocation") + (-261,24,-62,36))
+				
 				//repeat loop since the link is not reactive sometimes
 				repeat 2 times
 					
-					if not ImageFound(Image:"Select_your_Location/serviceaddress")
+					if not ImageFound(Image:"Select_your_Location/serviceaddress",SearchRectangle:myServiceAddressSearchArea)
 						Click "Select_your_Location/AddaNewLocation"
 					else
 						Log "Found the address field"
@@ -46,23 +58,24 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 					end if 
 				end repeat
 				
-				Click "Select_your_Location/serviceaddress"
+				Click FoundImageLocation()
 				TypeText ControlKey,"a",DeleteKey
-				SetOption KeyDownDelay, 0.09
-				TypeText global spreadsheet_data.(key)."Address"
+				
+				// type in the address
+				put (length(CurrentRecord.fullserviceaddress)) - 1 into myFirstAddressPartLength
+				set myAddressFirstPart to the first myFirstAddressPartLength characters of CurrentRecord.fullserviceaddress
+				set myAddressLastPart to the last character of CurrentRecord.fullserviceaddress
+				TypeText myAddressFirstPart
+				TypeText myAddressLastPart
 				Assert imageFound(Image: "Select_your_Location/DropDown", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with displaying the location"
 				TypeText returnKey
 				
 				Assert imageFound(Image: "Select_your_Location/LocationSelected", SearchRectangle:["Select_your_Location/LocationSelected_A","Select_your_Location/LocationSelected_B"], WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with selecting location"
 				SetOption KeyDownDelay,0.02 //0.02 is the Default value, so setting it back to default value
 				
-				//To Validate the address,assign to variable to compare
-				put global spreadsheet_data.(key)."Address" into AddVal
-				Log AddVal
-				Put readtext("Select_your_Location/Location_A","Select_your_Location/Location_B") into ActAdd
-				//Compare the Address
-				Assert AddVal is (ActAdd) with error !"[[my name]]: Actual address is [[ActAdd]]"
-		
+				put CurrentRecord.fullserviceaddress into AddVal
+				Log "Check for service at the following address:" && AddVal
+				
 				//Click on Check Service Availability
 				Click Image: "Select_your_Location/CheckServiceAvailability"
 				
@@ -75,25 +88,25 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 					log start_time
 					Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
 					Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
-					put time into end_time 
-					log end_time 
-					put end_time- start_time into time_Interval
-					log "Duration for Products Page: "&time_Interval
-					// Writing the duration of displaying the Products on the Page 
-					put  time_Interval into worksheet1.Cell("F"&global spreadsheet_data.(key)."Cellcount"+1)
-					put  end_time into worksheet1.Cell("G"&global spreadsheet_data.(key)."Cellcount"+1)
+					
+					// Calculating the duration of displaying the Products on the Page 
+					put time into CurrentRecord.ProductsPageTimeStamp 
+					log CurrentRecord.ProductsPageTimeStamp 
+					put CurrentRecord.ProductsPageTimeStamp - start_time into CurrentRecord.ProductsPageDuration
+					log "Duration for Products Page: "& CurrentRecord.ProductsPageDuration
+					
 				else
 					put time into start_time 
 					log start_time
 					Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
 					Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
-					put time into end_time 
-					log end_time 
-					put end_time- start_time into time_Interval
-					log "Duration for Products Page: "&time_Interval
-					// Writing the duration of displaying the Products on the Page 
-					put  time_Interval into worksheet1.Cell("F"&global spreadsheet_data.(key)."Cellcount"+1)
-					put  end_time into worksheet1.Cell("G"&global spreadsheet_data.(key)."Cellcount"+1)
+					// Calculating the duration of displaying the Products on the Page 
+					put time into CurrentRecord.ProductsPageTimeStamp 
+					log CurrentRecord.ProductsPageTimeStamp 
+					put CurrentRecord.ProductsPageTimeStamp - start_time into CurrentRecord.ProductsPageDuration
+					log "Duration for Products Page: "& CurrentRecord.ProductsPageDuration
+					
+					
 				end if
 				
 			else
@@ -101,19 +114,23 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				//This scenario when the user tries for first time. Add new Location would not be available for first time
 				Click "Select_your_Location/serviceaddress"
 				TypeText ControlKey,"a",DeleteKey
-				SetOption KeyDownDelay, 0.09
-				TypeText global spreadsheet_data.(key)."Address"
+				
+				
+				// type address
+				put (length(CurrentRecord.fullserviceaddress)) - 1 into myFirstAddressPartLength
+				set myAddressFirstPart to the first myFirstAddressPartLength characters of CurrentRecord.fullserviceaddress
+				set myAddressLastPart to the last character of CurrentRecord.fullserviceaddress
+				TypeText myAddressFirstPart
+				TypeText myAddressLastPart
 				Assert imageFound(Image: "Select_your_Location/DropDown", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with displaying the location"
 				TypeText returnKey
 				
 				Assert imageFound(Image: "Select_your_Location/LocationSelected", WaitFor: maxWait) with Exception !"[[my name]]: An exception occured with selecting location"
 				SetOption KeyDownDelay,0.02 //0.02 is the Default value, so setting it back to default value
 				//To Validate the address,assign to variable to compare
-				put global spreadsheet_data.(key)."Address" into AddVal
+				put CurrentRecord.fullserviceaddress into AddVal -- is this doing anything
 				Log AddVal
-				Put readtext("Select_your_Location/Location_A","Select_your_Location/Location_B") into ActAdd
-				//Compare the Address
-				Assert AddVal is (ActAdd) with error !"[[my name]]: Actual address is [[ActAdd]]"
+				
 				
 				//Click Service Availability button
 				Click Image: "Select_your_Location/CheckServiceAvailability"
@@ -121,13 +138,12 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				log start_time
 				Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with launching products"
 				Assert imageFound(Image:"Select_Your_Products/Select", WaitFor:FullMaxWait) with Exception !"[[my name]]: An exception occured with displaying products"
-				put time into end_time 
-				log end_time 
-				put end_time- start_time into time_Interval
-				log "Duration for Products Page: "&time_Interval
-				// Writing the duration of displaying the Products on the Page 
-				put  time_Interval into worksheet1.Cell("F"&global spreadsheet_data.(key)."Cellcount"+1)
-				put  end_time into worksheet1.Cell("G"&global spreadsheet_data.(key)."Cellcount"+1)
+				// Calculating the duration of displaying the Products on the Page 
+				put time into CurrentRecord.ProductsPageTimeStamp
+				log CurrentRecord.ProductsPageTimeStamp 
+				put CurrentRecord.ProductsPageTimeStamp - start_time into CurrentRecord.ProductsPageDuration
+				log "Duration for Products Page: "& CurrentRecord.ProductsPageDuration
+				
 			end if 
 			-- check max speed
 			//********************************* Select Your Product Page***********************************
@@ -137,8 +153,13 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				TypeText PageDown
 				Assert imageFound(Image:"Select_Your_Products/Back", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to previous page"
 				Click Image: "Select_Your_Products/Back"
-				put 0 into worksheet1.Cell("D"&global spreadsheet_data.(key)."Cellcount"+1) //Since no unlimited internet, writing 0 to file
-				put "N/A" into worksheet1.Cell("H"&global spreadsheet_data.(key)."Cellcount"+1) //Since no unlimited internet, writing 0 to file for duration
+				
+				//Since no unlimited internet, writing 0 to speed
+				put "0" into CurrentRecord.ActualSpeed
+				
+				//Since no unlimited internet, writing N/A for duration
+				put "N/A" into CurrentRecord.SetUpServiceDuration
+				
 				Log "-----------Reached the end----------------"
 			else
 				//****************************Set Up Your Service PopUp Window*********************************
@@ -147,32 +168,29 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				log starttime
 				//Click on Select button in Unlimited internet option
 				Click {Image:"Select_Your_Products/Select",WaitFor:minWait}
+				Wait 2
 				// if else condition since it sometimes displays data by clicking on Continue button
-				if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor:FullMaxWait)
-					Assert imageFound(Image:"Set_Up_Service/QUnlimitedInternet") with Exception !"[[my name]]: An exception occured with launching products"
+				if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet/QUnlimitedInternet", WaitFor:FullMaxWait)
+					Assert imageFound(Image:"Set_Up_Service/QUnlimitedInternet/QUnlimitedInternet") with Exception !"[[my name]]: An exception occured with launching products"
+					put "N/A" into CurrentRecord.ClickContinue
 				else 
 					Log "SetUpService Unlimited Window is not getting populated, hence clicking on continue button as some times it populates the window" 
 					Click Image: "Set_Up_Service/Continue"
-					put  TRUE into worksheet1.Cell("J"&global spreadsheet_data.(key)."Cellcount"+1)
+					
+					put "True" into CurrentRecord.ClickContinue
 					Assert imageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with launching products"
 				end if
-				put time into endtime 
-				log endtime 
-				put endtime- starttime into timeInterval
-				log "Duration of displaying internet speed popup window: "&timeInterval
-				// Writing the duration of displaying the internet speed to the file 
-				put  timeInterval into worksheet1.Cell("H"&global spreadsheet_data.(key)."Cellcount"+1)
-				put  endtime into worksheet1.Cell("I"&global spreadsheet_data.(key)."Cellcount"+1)
-				//To compare the speed, reading data from global spreadsheet
-				put global spreadsheet_data.(key)."Max_speed" into ExpSpeed
-				Log "Expected internet speed: "&ExpSpeed
+				
+				// calculate the duration of displaying the internet speed
+				put time into CurrentRecord.SetUpServiceTimeStamp 
+				log CurrentRecord.SetUpServiceTimeStamp 
+				put CurrentRecord.SetUpServiceTimeStamp - starttime into CurrentRecord.ProductsPageDuration
+				log "Duration of displaying internet speed popup window: "& CurrentRecord.ProductsPageDuration
+				
 				//Extracting data from the application
 				Put  readtext("Set_Up_Service/InternetSpeed_A","Set_Up_Service/InternetSpeed_B") into Readspeed
-				put word 1 delimited by "Mbps " of Readspeed into speed
-				Assert speed is (ExpSpeed) with error !"[[my name]]: Actual speed is [[speed]]"
-				put speed into worksheet1.Cell("D"&global spreadsheet_data.(key)."Cellcount"+1)  // Writing the Actual data into spreadsheet
-				
-				
+				put word 1 delimited by "Mbps " of Readspeed into CurrentRecord.ActualSpeed
+				Assert CurrentRecord.ActualSpeed is (CurrentRecord.MaxbbSpeed_res) with error !"[[my name]]: Actual speed is [[CurrentRecord.ActualSpeed]]"
 				
 				//To scroll down-- To close the Popup window
 				Click Image:"Set_Up_Service/QUnlimitedInternet" 
@@ -181,7 +199,8 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 				Click "Set_Up_Service/CancelSelection"
 				Assert imageFound(Image:"Select_Your_Products/Internet", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to products page"
 				-- go back,************************ Navigating back to Select Your Location Page***************************************
-				Click {Image:"Select_Your_Products/Internet"}
+				Click {Image:"Select_Your_Products/Internet/Internet1"}
+				Wait 2
 				TypeText PageDown
 				Assert imageFound(Image:"Select_Your_Products/Back", WaitFor:maxWait) with Exception !"[[my name]]: An exception occured with navigating to previous page"
 				Click {Image: "Select_Your_Products/Back"}
@@ -191,31 +210,33 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 		catch anException
 			// This would get executed if any of the code in the try loop fail
 			Log "*****CatchException*******Navigting back to Select Your Location Page*************************"
+			set CurrentRecord.Status to "E" -- flags record as an error
+			
 			//This if condition incase the internet speed popup window hangs
 			if ImageFound(Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait)
 				Click [Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait]
-				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+				Click {Image:"Select_Your_Products/Internet/Internet1", WaitFor: maxWait}
 				Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
 				WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
 			end if
 			//This if condition incase the internet speed popup window hangs after displaying data
-			if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet", WaitFor: maxWait)
-				Click {Image:"Set_Up_Service/QUnlimitedInternet", WaitFor: maxWait}
+			if ImageFound(Image:"Set_Up_Service/QUnlimitedInternet/QUnlimitedInternet", WaitFor: maxWait)
+				Click {Image:"Set_Up_Service/QUnlimitedInternet/QUnlimitedInternet", WaitFor: maxWait}
 				TypeText PageDown
 				Click {Image:"Set_Up_Service/CancelSelection", WaitFor: maxWait}
-				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+				Click {Image:"Select_Your_Products/Internet/Internet1", WaitFor: maxWait}
 				Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
 				WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
 			end if
 			//This if condition incase the Product Page hangs
-			if ImageFound(Image:"Select_Your_Products/Internet", WaitFor: maxWait)
-				Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}
+			if ImageFound(Image:"Select_Your_Products/Internet/Internet1", WaitFor: maxWait)
+				Click {Image:"Select_Your_Products/Internet/Internet1", WaitFor: maxWait}
 				//The below condition if the Page hangs and needs a refresh
 				if not ImageFound(Image:"Select_Your_Products/Back", WaitFor: maxWait)
 					Click {Image:"Browser/RefreshPage"}
 					WaitFor maxWait, "Select_Your_Products/Select"
 					ScrollWheelDown 4
-					Click {Image:"Select_Your_Products/Internet", WaitFor: maxWait}				
+					Click {Image:"Select_Your_Products/Internet/Internet1", WaitFor: maxWait}				
 					Click {Image:"Select_Your_Products/Back", WaitFor: maxWait}
 					WaitFor maxWait,Image:"Check_service_availability/accountowner_Fname"
 				else
@@ -227,6 +248,15 @@ to checkserviceAvailability FullMaxWait, maxWait, minWait
 			Log "-----------Reached the end in case of exception----------------"
 			
 		end try
+		
+		if CurrentRecord.maxbbspeed_res is equal to CurrentRecord.ActualSpeed
+			put "True" into CurrentRecord.Comparison
+		else
+			put "False" into CurrentRecord.Comparison
+		end if
+		
+		
+		If CurrentRecord.Status = "S" then Set CurrentRecord.Status to "F" -- flags the record as having finished
 		
 	end repeat
 	
