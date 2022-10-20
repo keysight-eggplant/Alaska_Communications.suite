@@ -1,0 +1,42 @@
+﻿
+(** This script is to Create the results file
+
+@Returns global filename
+
+
+@Version:  1.0 20/10/2022 **)
+
+
+// Calculate timestamp to use in results filename
+put formattedTime("%d%m%Y_%H%M") into timestamp
+
+//  copy the results file template and rename it using the timestamp
+copy file ResourcePath("EggplantSampleData_OP_20221006.xlsx") as ResourcePath("Results_data_"&timestamp&".xlsx")
+
+// open spreadsheet to create new headers used for the results file
+set Spreadsheet to Workbook(ResourcePath("Results_data_"&timestamp&".xlsx"))
+// set the tab
+set sheetdata to Spreadsheet.Worksheet("Sheet1")
+
+
+put "ActualSpeed" into sheetdata.cell("D1")
+put "Comparison" into sheetdata.cell("E1")
+put "FirstName" into sheetdata.cell("F1")
+put "LastName" into sheetdata.cell("G1")
+put "ProductsPageDuration" into sheetdata.cell("H1")
+put "ProductsPageTimeStamp" into sheetdata.cell("I1")
+put "SetUpServiceDuration" into sheetdata.cell("J1")
+put "SetUpServiceTimeStamp" into sheetdata.cell("K1")
+put "ClickContinue" into sheetdata.cell("L1")
+put "Status" into sheetdata.cell("M1")
+
+put "Results_data_"&timestamp&".xlsx" into global filename
+
+
+
+
+
+
+
+
+

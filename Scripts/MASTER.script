@@ -1,6 +1,6 @@
 ﻿(** This script is the master script that can be run directly from EPF
 
-@Version: 1.0 28/07/2022
+@Version: 2.0 20/10/2022
 
  **)
 
@@ -12,8 +12,7 @@ Run "Check_Broadband/Launch_Test_Site".launchAlaska, 20,"https://www.alaskacommu
 Run "Check_Broadband/Check_my_address".checkmyaddress 10
 Run "Check_Broadband/Order_New_Service".orderNewService 10
 
-(*Run "Check_Broadband/Read_In_Spreadsheet"*)
-Run "Check_Broadband/Check_Service_availability_new".checkserviceAvailability 300, 30,5
+Run "Check_Broadband/Check_Service_availability".checkserviceAvailability 300, 30,5
 
 
 
