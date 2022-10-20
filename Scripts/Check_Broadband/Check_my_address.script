@@ -1,4 +1,4 @@
-
+﻿
 (** This script is to "click on check my address"
 @Params maxWait: The amount of time it would wait
 @Version: 1.0 28/07/2022
@@ -8,7 +8,7 @@
 to checkmyaddress maxWait
 
 
-	TypeText "ControlKey", "F"
+	TypeText ControlKey, "f"
 	TypeText "Check my address", returnKey
 	Assert imageFound(Image:"HomePage/CheckMyAddress", WaitFor:maxWait) with Exception !"[[my name]]: Checking if Checking my Address button is visible"
 	Click Image:"HomePage/CheckMyAddress"

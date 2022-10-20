@@ -5,10 +5,10 @@
 		49,
 		49
 	],
-	"lastmodifieddate": 1659091686.733,
+	"lastmodifieddate": 1666217705.9429998,
 	"createddate": 1659091686.733,
 	"name": "Select_Your_Products/Internet/Internet1",
-	"lastfounddate": 1659091730.3439999,
+	"lastfounddate": 1666225835.5549998,
 	"ocrcapturestring": "INTERNET",
 	"lastfoundlocation": [
 		80,
@@ -35,6 +35,33 @@
 				"connectionname": "99.81.107.4",
 				"type": 1,
 				"connectionserverid": "99.81.107.4",
+				"capturerect": [
+					80,
+					272,
+					49,
+					49
+				],
+				"connectiontype": "RDP",
+				"capturedocrtext": "INTERNET"
+			},
+		{
+				"connectionportnum": 3389,
+				"properties": {
+					"CropRectangle": "[0,0,0,0]",
+					"Rotate": 0,
+					"Scale": "    1",
+					"HotSpot": "[24,24]",
+					"Tolerance": 76,
+					"Discrepancy": "_0",
+					"SearchType": "Smoothed for Text"
+				},
+				"sutinfo": {
+					"type": "Unknown RDP"
+				},
+				"name": "Select_Your_Products/Internet/Internet1.png",
+				"connectionname": "Dell Laptop",
+				"type": 1,
+				"connectionserverid": "davehester-dell",
 				"capturerect": [
 					80,
 					272,
